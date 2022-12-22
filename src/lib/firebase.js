@@ -1,7 +1,5 @@
 import {initializeApp} from 'firebase/app';
-import {FieldValue, getFirestore} from 'firebase/firestore';
-import {collection,addDoc} from 'firebase/firestore';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import {getFirestore} from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -15,5 +13,5 @@ const firebaseConfig = {
 const firebase = initializeApp(firebaseConfig);
 const db = getFirestore(firebase);
 
-export { db , collection , addDoc }
+export { db , firebase }
 
