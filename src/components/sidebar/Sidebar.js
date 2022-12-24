@@ -8,7 +8,7 @@ const Sidebar = () => {
   return (
     <div className="p-4">
      <User fullName={user?.fullName} username={user?.username}/>
-      <Suggestions userId={user?.userId} following={user?.following}/> 
+      <Suggestions userId={user?.userId} following={user?.following} loggedInUserDocId={user?.docId}/> 
     </div>
   )
 }
