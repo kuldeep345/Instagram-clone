@@ -5,11 +5,13 @@ import userContext from '../context/user'
 import * as ROUTES from '../constants/routes'
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom'
+import useAuthStore from '../store'
 
 const Header = () => {
 
   const { firebase } = useContext(FirebaseContext)
-  const { user } = useContext(userContext)
+  const { userProfile } = useAuthStore()
+
   const auth = getAuth();
   const navigate = useNavigate()
 
@@ -25,7 +27,7 @@ const Header = () => {
             </h1>
           </div>
           <div className="text-gray-700 text-center flex items-center gap-6">
-              {user ? (
+              {userProfile ? (
                 <>
                 <Link to={ROUTES.DASHBOARD}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
@@ -56,11 +58,11 @@ const Header = () => {
 
                 </button>
               <div className='flex items-center cursor-pointer'>
-                    <Link to={`/p/${user.displayName}`}>
+                    <Link to={`/p/${userProfile.displayName}`}>
                       <img 
                       className='rounded-full h-8 w-8 flex'
                       src={`/images/avatars/karl.jpg`}
-                      alt={`${user.displayName} profile`}
+                      alt={`${userProfile.displayName} profile`}
                       />
                     </Link>
               </div>

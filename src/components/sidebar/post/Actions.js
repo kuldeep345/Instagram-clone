@@ -5,19 +5,21 @@ import UserContext from '../../../context/user'
 import { handleLikes } from '../../../services/firebase'
 import {AiOutlineHeart , AiFillHeart} from 'react-icons/ai'
 import {BsChatDots} from 'react-icons/bs'
+import useAuthStore from '../../../store'
 
 
 const Actions = ({ docId , totalLikes , likedPhoto, handleFocus}) => {
-    const { user:{ uid: userId = '' } } = useContext(UserContext)
+    const {  userProfile }  = useAuthStore()
 
     const [toggleLiked , setToggleLiked] = useState(likedPhoto)
 
-    const [ likes , setLikes] = useState(totalLikes)
-    
+    const [ likes , setLikes] = useState(totalLikes.length)
+
+   
     const handleToggleLiked = async () => {
         setToggleLiked((toggleLiked) => !toggleLiked)
 
-        const response = await handleLikes(userId , docId , toggleLiked)
+        const response = await handleLikes(userProfile?.userId , docId , toggleLiked)
 
         setLikes((likes) => (toggleLiked ? likes - 1 : likes + 1))
     }
@@ -45,7 +47,7 @@ const Actions = ({ docId , totalLikes , likedPhoto, handleFocus}) => {
         </div>
     </div>
       <div className="p-4 py-0">
-      <p className="font-bold">{likes === 1 ? `${likes} like` : `${likes.length} likes`}</p>
+      <p className="font-bold">{likes === 1 ? `${likes} like` : `${likes} likes`}</p>
       </div>
 
       </>

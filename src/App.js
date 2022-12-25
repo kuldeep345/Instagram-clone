@@ -1,8 +1,9 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter as Router , Routes , Route } from 'react-router-dom'
+import { BrowserRouter as Router , Routes , Route} from 'react-router-dom'
 import * as ROUTES from './constants/routes'
 import useAuthListener from './hooks/use-auth-listner'
 import userContext from './context/user'
+import ProtectedRoute from "./helpers/ProtectedRoute";
 const Login = lazy(() => import('./pages/Login'))
 const Dashboard = lazy(() => import('./pages/dashboard'))
 const SignUp = lazy(() => import('./pages/SignUp'))
@@ -20,7 +21,7 @@ function App() {
        <Routes>
           <Route path="/">
               <Route path={ROUTES.DASHBOARD} element={<Dashboard/>}/>
-              <Route path={ROUTES.LOGIN} element={<Login/>}/>
+              <Route path={ROUTES.LOGIN} element={<Login/> }/>
               <Route path={ROUTES.SIGN_UP} element={<SignUp/>}/>
               <Route path={ROUTES.NOT_FOUND} element={<NotFound/>}/>
           </Route>

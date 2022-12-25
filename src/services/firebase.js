@@ -74,8 +74,18 @@ export async function getPhotos(userId , following){
 
 
 export async function handleLikes(userId , docId , toggleLiked){
+    console.log(userId , docId , toggleLiked)
     const userFollowingRef = doc(db, "photos", docId);
     await updateDoc(userFollowingRef , {
       likes : toggleLiked ? arrayRemove(userId) : arrayUnion(userId)
+    });
+}
+
+
+export async function handleComments(docId , displayName , comment){
+    console.log(docId , displayName , comment)
+    const userCommentRef = doc(db, "photos", docId);
+    await updateDoc(userCommentRef , {
+      comments : arrayUnion({displayName , comment})
     });
 }

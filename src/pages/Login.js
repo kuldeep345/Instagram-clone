@@ -2,10 +2,10 @@ import { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import FirebaseContext from '../context/firebase'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-
+import useAuthStore from'../store'
 
 const Login = () => {
-
+  const { setUser } = useAuthStore()
   const navigate = useNavigate()
 
   const [ email , setEmail ] = useState('')
@@ -19,11 +19,12 @@ const Login = () => {
 
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential)
+      .then(({user:{displayName,email,uid , fullName}}) => {
+        setUser({displayName , email,userId:uid})
         navigate('/')
       })
       .catch((error) => {
+        console.log(error)
         setEmail('')
         setPassword('')
         setError('No User Found')

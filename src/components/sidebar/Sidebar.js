@@ -1,8 +1,11 @@
 import useUser from "../../hooks/use-user"
 import User from "./User."
 import Suggestions from './Suggestions'
+import useAuthStore from "../../store"
+
 
 const Sidebar = () => {
+
   const {user} = useUser() 
 
   return (
