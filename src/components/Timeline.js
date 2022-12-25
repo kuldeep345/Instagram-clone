@@ -9,7 +9,7 @@ const Timeline = () => {
    
   const {Photos} = useAuthStore()
 
-  console.log(Photos)
+
   return (
     <div className="container col-span-2">
       {!Photos ? (

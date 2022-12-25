@@ -1,4 +1,4 @@
-import { collection, query, where, getDocs ,doc, updateDoc , arrayUnion , arrayRemove } from "firebase/firestore";
+import { collection, query, where, getDocs ,doc, updateDoc , arrayUnion , arrayRemove} from "firebase/firestore";
 import { db, firebase } from '../lib/firebase'
 
 export async function doesUsernameExist(username){
@@ -11,6 +11,30 @@ export async function doesUsernameExist(username){
     else{
         return false
     }
+}
+
+export async function getUserByUsername(username){
+    const q = query(collection(db, "users"), where("username", "==", username));
+    const querySnapshot = await getDocs(q);
+    
+    const user = querySnapshot.docs.map((item) => ({
+        ...item.data(),
+        docId:item.id
+    }))
+
+    return user.length > 0 ? user : false
+}
+
+export async function getPhotoByUsername(userId){
+    const q = query(collection(db, "photos"), where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+    
+    const user = querySnapshot.docs.map((item) => ({
+        ...item.data(),
+        docId:item.id
+    }))
+
+    return user.length > 0 ? user : false
 }
 
 
@@ -74,7 +98,7 @@ export async function getPhotos(userId , following){
 
 
 export async function handleLikes(userId , docId , toggleLiked){
-    console.log(userId , docId , toggleLiked)
+  
     const userFollowingRef = doc(db, "photos", docId);
     await updateDoc(userFollowingRef , {
       likes : toggleLiked ? arrayRemove(userId) : arrayUnion(userId)
@@ -83,9 +107,22 @@ export async function handleLikes(userId , docId , toggleLiked){
 
 
 export async function handleComments(docId , displayName , comment){
-    console.log(docId , displayName , comment)
+ 
     const userCommentRef = doc(db, "photos", docId);
     await updateDoc(userCommentRef , {
       comments : arrayUnion({displayName , comment})
     });
+}
+
+export async function isUserFollowingProfile(loggedInUser , profileUserId){
+    const q = query(collection(db, "users"), where("username", "==", loggedInUser) , where('following', 'array-contains', profileUserId ));
+    const queryDocs = await getDocs(q)
+    const user = queryDocs.docs.map((item) => ({
+        ...item.data(),
+        docId:item.id
+    }))
+
+    console.log(user)
+    return user.length > 0 ? true : false
+    
 }

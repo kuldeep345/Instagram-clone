@@ -19,7 +19,7 @@ export default function usePhotos() {
             }
 
             followedUserPhotos.sort((a,b)=> b.dateCreated - a.dateCreated)
-            console.log(followedUserPhotos)
+           
             setPhotos(followedUserPhotos)            
         }
 
