@@ -122,7 +122,12 @@ export async function isUserFollowingProfile(loggedInUser , profileUserId){
         docId:item.id
     }))
 
-    console.log(user)
     return user.length > 0 ? true : false
     
+}
+
+
+export async function toggleFollow(isFollowingProfile , activeUserDocId , profileDocId, profileUserId, followingUserId){
+    await updateLoggedInUserFollowing(activeUserDocId,profileUserId,isFollowingProfile)
+    await updateFollowedUserFollowers(profileDocId ,followingUserId, isFollowingProfile)
 }

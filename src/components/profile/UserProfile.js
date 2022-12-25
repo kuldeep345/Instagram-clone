@@ -37,7 +37,7 @@ export default function Profile({user}){
         setFollowerCount={dispatch}
         username={user.username}
         />
-        <Photos photos={photosCollection}/>
+        <Photos Photos={photosCollection}/>
         <p>Hello {user.username}</p>
         </>
         )
