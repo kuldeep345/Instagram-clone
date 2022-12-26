@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState } from "react";
 import { BrowserRouter as Router , Routes , Route} from 'react-router-dom'
 import * as ROUTES from './constants/routes'
 import userContext from './context/user'
@@ -11,8 +11,11 @@ const NotFound = lazy(()=> import('./pages/NotFound'))
 
 function App() {
 
+  const [fetchPhotos, setfetchPhotos] = useState(false)
+  console.log(fetchPhotos)
+
   return (
-    
+    <userContext.Provider value={{fetchPhotos , setfetchPhotos}}>
     <Router>
       <Suspense fallback={<p>Loading...</p>}>
        <Routes>
@@ -26,6 +29,7 @@ function App() {
        </Routes>
        </Suspense>
     </Router>
+    </userContext.Provider>
   );
 }
 

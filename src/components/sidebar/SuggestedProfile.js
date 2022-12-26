@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState , useRef, useContext} from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { updateLoggedInUserFollowing , updateFollowedUserFollowers } from '../../services/firebase'
+import userContext from '../../context/user'
 
 const SuggestedProfile = ({userDocId,username,profileId,userId,loggedInUserDocId}) => {
     const [followed , setFollowed] = useState(false)
+    const { fetchPhotos ,  setfetchPhotos } = useContext(userContext)
 
     async function handleFollowUser(){
       setFollowed(true);
-
+      setfetchPhotos(!fetchPhotos)
       await updateLoggedInUserFollowing(loggedInUserDocId , profileId , false)
 
       await updateFollowedUserFollowers(userDocId , userId , false)

@@ -1,11 +1,14 @@
 import { useState , useEffect , useContext } from 'react'
+import userContext from '../context/user'
 import UserContext from '../context/user'
 import { getUserByUserId, getPhotos } from '../services/firebase'
 import useAuthStore from '../store'
 
+
 export default function usePhotos() {
         
    const { userProfile ,setPhotos} = useAuthStore()
+   const {fetchPhotos} = useContext(userContext)
    
     useEffect(() => {
         async function getTimeLinePhotos() {
@@ -27,6 +30,6 @@ export default function usePhotos() {
             getTimeLinePhotos();
         }
 
-    }, [])
+    }, [fetchPhotos , !fetchPhotos])
     
 }

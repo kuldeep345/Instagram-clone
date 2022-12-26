@@ -33,9 +33,13 @@ const Photos = ({Photos}) => {
           ) : null
         }
       </div>
+      {!Photos || (Photos.length === 0 && <p className='text-center text-2xl'>No Posts yet</p>)}
     </div>
   )
 }
 
+Photos.propTypes = {
+  Photos: PropTypes.array.isRequired
+}
 
 export default Photos
