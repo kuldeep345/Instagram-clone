@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Skeleton from 'react-loading-skeleton'
 import { isUserFollowingProfile , toggleFollow} from '../../services/firebase'
 import useUser from '../../hooks/use-user'
+import useAuthStore from '../../store'
 
 const Header = ({ photosCount, 
   profile,
@@ -14,6 +15,8 @@ const Header = ({ photosCount,
    
     const { user } = useUser()
   const [isFollowingProfile , setIsFollowingProfile] = useState(false)
+  const [image, setimage] = useState(true)
+  const { userProfile } = useAuthStore()
 
     const activeBtnFollow = user?.username && user?.username !== profile?.username
    
@@ -37,13 +40,47 @@ const Header = ({ photosCount,
     await toggleFollow(isFollowingProfile , user.docId , profile?.docId , profile.userId , user.userId)
   }
 
+
+  
+  function testImage(url) {
+    const imgPromise = new Promise(function imgPromise(resolve, reject) {
+        const imgElement = new Image();
+        imgElement.addEventListener('load', function imgOnLoad() {
+            resolve(this);
+        });
+        imgElement.addEventListener('error', function imgOnError() {
+            reject();
+        })
+        imgElement.src = url;
+    });
+
+    return imgPromise;
+}
+
+useEffect(() => {
+  testImage(`http://localhost:3000/images/avatars/${userProfile?.displayName}.jpg`).then(
+  function fulfilled(img) {
+      setimage(false)
+  },
+  function rejected() {
+      setimage(true)
+  }
+);
+}, [userProfile?.displayName])
+
+
+
  
  
   return (
     <div className='grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg px-2 lg:px-0'>
       <div className='container flex justify-center items-center col-span-3 lg:col-span-1'>
      
-         {profile.username && (<img 
+         {profile.username && ( image ? <img 
+          className='rounded-full w-28 h-28 lg:h-40 lg:w-40 flex'
+          alt={`${profile?.username} profile`}
+          src={`/images/avatars/default.png`}
+          /> : <img 
           className='rounded-full w-28 h-28 lg:h-40 lg:w-40 flex'
           alt={`${profile?.username} profile`}
           src={`/images/avatars/${profile?.username}.jpg`}
