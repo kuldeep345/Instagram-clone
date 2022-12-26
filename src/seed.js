@@ -2,7 +2,7 @@ import { collection, addDoc } from "firebase/firestore";
 
 export async function seedDatabase(db) {
     await addDoc(collection(db , 'photos') , {
-        photoId: "7",
+        photoId: "9",
         userId: 'tFh1UCqdcTQYUbHc9GoJ0O4DMZa2',
         imageSrc: "/images/users/kuldeep/2.jpg",
         caption: 'playing basketball with friends',

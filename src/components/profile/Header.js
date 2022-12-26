@@ -16,8 +16,7 @@ const Header = ({ photosCount,
   const [isFollowingProfile , setIsFollowingProfile] = useState(false)
 
     const activeBtnFollow = user?.username && user?.username !== profile?.username
-    console.log(isFollowingProfile)
-
+   
   useEffect(() => {
     const isLoggedInUserFollowingProfile = async()=>{
       const isFollowing = await isUserFollowingProfile(user?.username, profile.userId)
@@ -38,7 +37,7 @@ const Header = ({ photosCount,
     await toggleFollow(isFollowingProfile , user.docId , profile?.docId , profile.userId , user.userId)
   }
 
-  console.log(followerCount)
+ 
  
   return (
     <div className='grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg'>
@@ -74,12 +73,12 @@ const Header = ({ photosCount,
                 </p>
                 <p className='mr-10'>
                   <span className='font-bold'>{followerCount}</span>
-                  {` `}
+                  {` `} 
                   {followers===1 ? 'follower' : 'followers'}
                 </p>
                 <p className='mr-10'>
                   <span className='font-bold'>
-                    {following.length}{` `}
+                    {profile?.following?.length}{` `}
                     following
                   </span>
                 </p>

@@ -10,7 +10,7 @@ const Sidebar = () => {
 
   return (
     <div className="p-4">
-     <User fullName={user?.fullName} username={user?.username}/>
+     <User fullName={user?.fullName} username={user?.username} displayName={user?.displayName}/>
       <Suggestions userId={user?.userId} following={user?.following} loggedInUserDocId={user?.docId}/> 
     </div>
   )

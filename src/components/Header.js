@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import FirebaseContext from '../context/firebase'
 import { Link } from 'react-router-dom'
 import userContext from '../context/user'
@@ -10,10 +10,40 @@ import useAuthStore from '../store'
 const Header = () => {
 
   const { firebase } = useContext(FirebaseContext)
-  const { userProfile } = useAuthStore()
+  const { userProfile , setUser } = useAuthStore()
+  const [image, setimage] = useState(true)
 
   const auth = getAuth();
   const navigate = useNavigate()
+
+  function testImage(url) {
+    const imgPromise = new Promise(function imgPromise(resolve, reject) {
+        const imgElement = new Image();
+        imgElement.addEventListener('load', function imgOnLoad() {
+            resolve(this);
+        });
+        imgElement.addEventListener('error', function imgOnError() {
+            reject();
+        })
+        imgElement.src = url;
+    });
+
+    return imgPromise;
+}
+
+useEffect(() => {
+  testImage(`http://localhost:3000/images/avatars/${userProfile?.displayName}.jpg`).then(
+  function fulfilled(img) {
+      setimage(false)
+  },
+  function rejected() {
+      setimage(true)
+  }
+);
+}, [userProfile?.displayName])
+
+
+
 
   return (
     <header className='h-16 bg-white border-b border-gray-200 mb-8'>
@@ -40,6 +70,7 @@ const Header = () => {
                 title='Sign Out'
                 onClick={()=>{
                   signOut(auth).then(() => {
+                    setUser(null)
                     navigate('/login')
                   })
                 }}
@@ -59,11 +90,15 @@ const Header = () => {
                 </button>
               <div className='flex items-center cursor-pointer'>
                     <Link to={`/p/${userProfile.displayName}`}>
-                      <img 
+                   {image ?  <img 
                       className='rounded-full h-8 w-8 flex'
-                      src={`/images/avatars/karl.jpg`}
+                      src={`/images/avatars/default.png`}
                       alt={`${userProfile.displayName} profile`}
-                      />
+                      />  : <img 
+                      className='rounded-full h-8 w-8 flex'
+                      src={`/images/avatars/${userProfile.displayName.toLowerCase()}.jpg`}
+                      alt={`${userProfile.displayName} profile`}
+                      />  }
                     </Link>
               </div>
                 </>

@@ -12,8 +12,7 @@ const NotFound = lazy(()=> import('./pages/NotFound'))
 function App() {
 
   const [fetchPhotos, setfetchPhotos] = useState(false)
-  console.log(fetchPhotos)
-
+  
   return (
     <userContext.Provider value={{fetchPhotos , setfetchPhotos}}>
     <Router>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Header from './Header'
 import Photos from './Photos'
 import { getUserByUsername , getPhotoByUsername} from '../../services/firebase'
-import useAuthStore from '../../store'
+
 
 export default function Profile({user}){
     
@@ -38,7 +38,7 @@ export default function Profile({user}){
         username={user.username}
         />
         <Photos Photos={photosCollection}/>
-        <p>Hello {user.username}</p>
+
         </>
         )
 }

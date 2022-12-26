@@ -5,7 +5,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import useAuthStore from'../store'
 
 const Login = () => {
-  const { setUser } = useAuthStore()
+  const { setUser , userProfile } = useAuthStore()
   const navigate = useNavigate()
 
   const [ email , setEmail ] = useState('')
@@ -19,7 +19,7 @@ const Login = () => {
 
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-      .then(({user:{displayName,email,uid , fullName}}) => {
+      .then(({user:{displayName,email,uid}}) => {
         setUser({displayName , email,userId:uid})
         navigate('/')
       })
@@ -34,10 +34,15 @@ const Login = () => {
 
   useEffect(() => {
     document.title = 'Login - Instagram'
+    if(userProfile !== null){
+      navigate('/')
+    }
+    
   }, [])
-  
+
+
   return (
-    <>
+   !userProfile &&  <>
     <div className='container flex mx-auto max-w-screen-md items-center h-screen'>
       <div className="flex w-3/5">
         <img src='/images/iphone-with-profile.jpg' alt="iPhone with Instagram app"/>

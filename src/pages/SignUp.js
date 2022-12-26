@@ -30,6 +30,7 @@ const SignUp = () => {
                     displayName: username
                   }).then(async(data) => {        
                     navigate('/')
+                    console.log(data)
                   }).catch((error) => {
                     console.log(error)
                   });
@@ -103,13 +104,13 @@ const SignUp = () => {
               className='text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-primary rounded mb-2 outline-none'
               onChange={(e)=>setPassword(e.target.value)}
               />
-              <button disabled={isInvalid} type="submit" className={`bg-blue-500 text-white w-full rounded h-8 font-bold ${isInvalid && 'opacity-50'}`}>Log In</button>
+              <button disabled={isInvalid} type="submit" className={`bg-blue-500 text-white w-full rounded h-8 font-bold ${isInvalid && 'opacity-50'}`}>Sign Up</button>
           </form>
       </div>
         <div className="flex justify-center items-center flex-col w-full bg-white p-4 rounded border border-gray-primary">
           <p className="text-sm">Have an account{` `}
             <Link to='/login' className="font-bold text-blue-500">
-              Sign up
+              Login
             </Link>
           </p>
         </div>

@@ -9,15 +9,16 @@ import Post from "./sidebar/post/Post"
 const Timeline = () => {
    const x = usePhotos()
    const {fetchPhotos} = useContext(userContext)
-  const {Photos} = useAuthStore()
+  const {Photos ,  userProfile} = useAuthStore()
 
+ 
   useEffect(() => {
    
   }, [fetchPhotos , !fetchPhotos])
   
 
   return (
-    <div className="container col-span-2">
+    <div className="container col-span-2 min-h-screen">
       {!Photos ? (
         <>
         {[...new Array(4)].map((_ , index)=>(

@@ -13,7 +13,7 @@ export default function usePhotos() {
     useEffect(() => {
         async function getTimeLinePhotos() {
             const response = await getUserByUserId(userProfile?.userId)
-            const following = response[0].following
+            const following = response[0]?.following
 
             let followedUserPhotos = [];
 
