@@ -1,5 +1,4 @@
-import { useState , useEffect , useContext } from 'react'
-import userContext from '../context/user'
+import { useState , useEffect  } from 'react'
 import { getUserByUserId } from '../services/firebase'
 import useAuthStore from '../store'
 

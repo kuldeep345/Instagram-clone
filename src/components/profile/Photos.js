@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types'
-import { useState } from 'react'
 import Skeleton from 'react-loading-skeleton'
 import {AiFillHeart} from 'react-icons/ai'
 import {BsFillChatDotsFill} from 'react-icons/bs'
@@ -7,8 +6,8 @@ import {BsFillChatDotsFill} from 'react-icons/bs'
 const Photos = ({Photos}) => {
 
   return (
-    <div className='h-16 border-t border-gray-200 mt-12 pt-4 min-h-screen'>
-      <div className="grid grid-cols-3 gap-8 mt-4 mb-12">
+    <div className='h-16 border-t border-gray-200 mt-12 pt-4 min-h-screen px-2 lg:px-0'>
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 mt-4 mb-12">
         {
           Photos.length < 1 ? (
             <>

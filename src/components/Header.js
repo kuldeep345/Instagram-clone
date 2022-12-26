@@ -1,7 +1,5 @@
-import { useContext, useEffect, useState } from 'react'
-import FirebaseContext from '../context/firebase'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import userContext from '../context/user'
 import * as ROUTES from '../constants/routes'
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom'
@@ -9,7 +7,6 @@ import useAuthStore from '../store'
 
 const Header = () => {
 
-  const { firebase } = useContext(FirebaseContext)
   const { userProfile , setUser } = useAuthStore()
   const [image, setimage] = useState(true)
 
@@ -46,13 +43,14 @@ useEffect(() => {
 
 
   return (
-    <header className='h-16 bg-white border-b border-gray-200 mb-8'>
+    <header className='h-16 bg-white border-b border-gray-200 mb-8 px-2 lg:px-0'>
       <div className="container mx-auto max-w-screen-lg h-full">
         <div className="flex justify-between h-full">
           <div className="text-gray-700 text-center flex items-center cursor-pointer">
             <h1 className='flex justify-center w-full'>
               <Link to={ROUTES.DASHBOARD}>
-                <img src='/images/logo.png' className='mt-2 w-6/12'/>
+                
+                <img src='/images/logo.png' className='mt-2 w-6/12' alt=""/>
               </Link>
             </h1>
           </div>

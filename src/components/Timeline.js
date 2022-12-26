@@ -7,18 +7,19 @@ import Post from "./sidebar/post/Post"
 
 
 const Timeline = () => {
-   const x = usePhotos()
+   usePhotos()
    const {fetchPhotos} = useContext(userContext)
-  const {Photos ,  userProfile} = useAuthStore()
+  const {Photos } = useAuthStore()
 
  
   useEffect(() => {
    
+    // eslint-disable-next-line
   }, [fetchPhotos , !fetchPhotos])
   
 
   return (
-    <div className="container col-span-2 min-h-screen">
+    <div className="container col-span-3 lg:col-span-2 min-h-screen">
       {!Photos ? (
         <>
         {[...new Array(4)].map((_ , index)=>(

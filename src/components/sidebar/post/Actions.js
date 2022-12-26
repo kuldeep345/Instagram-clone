@@ -1,7 +1,5 @@
-import { useState , useContext } from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
-import FirebaseContext from '../../../context/firebase'
-import UserContext from '../../../context/user'
 import { handleLikes } from '../../../services/firebase'
 import {AiOutlineHeart , AiFillHeart} from 'react-icons/ai'
 import {BsChatDots} from 'react-icons/bs'
@@ -19,7 +17,7 @@ const Actions = ({ docId , totalLikes , likedPhoto, handleFocus}) => {
     const handleToggleLiked = async () => {
         setToggleLiked((toggleLiked) => !toggleLiked)
 
-        const response = await handleLikes(userProfile?.userId , docId , toggleLiked)
+       await handleLikes(userProfile?.userId , docId , toggleLiked)
 
         setLikes((likes) => (toggleLiked ? likes - 1 : likes + 1))
     }

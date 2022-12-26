@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 
 const Footer = ({caption , username}) => {
   return (

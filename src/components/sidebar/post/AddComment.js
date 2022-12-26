@@ -1,7 +1,5 @@
-import { useState , useContext } from 'react'
+import { useState  } from 'react'
 import PropTypes from 'prop-types'
-import FirebaseContext from '../../../context/firebase'
-import userContext from '../../../context/user'
 import { handleComments } from '../../../services/firebase'
 import useUser from '../../../hooks/use-user'
 

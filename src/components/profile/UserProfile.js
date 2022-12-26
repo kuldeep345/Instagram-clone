@@ -1,8 +1,7 @@
 import { useReducer , useEffect } from 'react'
-import PropTypes from 'prop-types'
 import Header from './Header'
 import Photos from './Photos'
-import { getUserByUsername , getPhotoByUsername} from '../../services/firebase'
+import { getPhotoByUsername} from '../../services/firebase'
 
 
 export default function Profile({user}){
@@ -27,7 +26,7 @@ export default function Profile({user}){
         getProfileInfoAndPhotos()
     }
 
-    }, [user.username])
+    }, [user , user.username])
     
     return (
         <>

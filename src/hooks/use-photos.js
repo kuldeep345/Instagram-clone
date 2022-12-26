@@ -1,6 +1,5 @@
-import { useState , useEffect , useContext } from 'react'
+import { useEffect , useContext } from 'react'
 import userContext from '../context/user'
-import UserContext from '../context/user'
 import { getUserByUserId, getPhotos } from '../services/firebase'
 import useAuthStore from '../store'
 
@@ -30,6 +29,6 @@ export default function usePhotos() {
             getTimeLinePhotos();
         }
 
-    }, [fetchPhotos , !fetchPhotos])
+    }, [fetchPhotos , userProfile?.userId, setPhotos])
     
 }

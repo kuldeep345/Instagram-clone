@@ -18,7 +18,7 @@ const Dashboard = () => {
     if (!userProfile) {
       navigate('/login')
     }
-  }, [])
+  })
 
   return (
       <>

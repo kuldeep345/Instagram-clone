@@ -7,14 +7,13 @@ import SuggestedProfile from './SuggestedProfile'
 const Suggestions = ({userId,following,loggedInUserDocId}) => {
   const [ profiles , setProfiles ] = useState(null)
 
-  // const filteredProfile = profiles?.filter((profile)=> profile.userId !== userId && !following.includes(profile.userId))
-
   useEffect(() => {
     async function suggestedProfiles(){
       const response = await getSuggestedProfiles(userId , following)
       setProfiles(response)
     }
     suggestedProfiles();
+    // eslint-disable-next-line
   }, [userId])
   
 

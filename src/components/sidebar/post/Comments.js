@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { format, formatDistance } from 'date-fns'
+import { formatDistance } from 'date-fns'
 import { Link } from 'react-router-dom'
 import AddComment from './AddComment'
 

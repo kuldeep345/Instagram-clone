@@ -40,18 +40,19 @@ const Header = ({ photosCount,
  
  
   return (
-    <div className='grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg'>
-      <div className='container flex justify-center'>
+    <div className='grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg px-2 lg:px-0'>
+      <div className='container flex justify-center items-center col-span-3 lg:col-span-1'>
+     
          {profile.username && (<img 
-          className='rounded-full h-40 w-40 flex'
-          alt={`${profile?.username} profile picture`}
+          className='rounded-full w-28 h-28 lg:h-40 lg:w-40 flex'
+          alt={`${profile?.username} profile`}
           src={`/images/avatars/${profile?.username}.jpg`}
           />)
           }
       </div>
-      <div className='flex items-center justify-center flex-col col-span-2'>
-          <div className='container flex items-center'>
-            <p className="text-2xl mr-4">{profile.username}</p>
+      <div className='flex items-center justify-center flex-col col-span-3 lg:col-span-2'>
+          <div className='container flex items-center '>
+            <p className="text-2xl lg:mr-4 mx-auto">{profile.username}</p>
             {activeBtnFollow && (
               <button
               className='bg-blue-500 font-bold text-sm rounded text-white w-20 h-8'
@@ -62,21 +63,21 @@ const Header = ({ photosCount,
               </button>
             )}
           </div>
-          <div className='container flex mt-4'>
+          <div className='container flex gap-6 mt-2 lg:mt-4 justify-center items-center'>
               {followers === undefined || following === undefined ? (
                 <Skeleton count={1} width={677} height={24}/>
               ) : (
                 <>
-                <p className='mr-10'>
+                <p className='lg:mr-10'>
                   <span className="font-bold">{photosCount}</span>{` `}
                   photos
                 </p>
-                <p className='mr-10'>
+                <p className='lg:mr-10'>
                   <span className='font-bold'>{followerCount}</span>
                   {` `} 
                   {followers===1 ? 'follower' : 'followers'}
                 </p>
-                <p className='mr-10'>
+                <p className='lg:mr-10'>
                   <span className='font-bold'>
                     {profile?.following?.length}{` `}
                     following
@@ -85,7 +86,7 @@ const Header = ({ photosCount,
                 </>
               )}
           </div>
-          <div className='container mt-4'>
+          <div className='container mt-2 lg:mt-4 flex items-center justify-center'>
                 <p className='font-medium'>{!profile?.fullName ? <Skeleton count={1} height={24}/> : profile?.fullName}</p>
           </div>
       </div>
@@ -98,7 +99,6 @@ const Header = ({ photosCount,
 Header.propTypes = {
   username: PropTypes.string.isRequired,
   photosCount: PropTypes.number.isRequired,
-  profile:PropTypes.object.isRequired,
   followerCount:PropTypes.number.isRequired,
   setFollowerCount:PropTypes.func.isRequired,
   profile:PropTypes.shape({
