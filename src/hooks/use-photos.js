@@ -29,6 +29,6 @@ export default function usePhotos() {
             getTimeLinePhotos();
         }
 
-    }, [fetchPhotos , userProfile?.userId, setPhotos])
+    }, [fetchPhotos , !fetchPhotos , userProfile?.userId, setPhotos])
     
 }

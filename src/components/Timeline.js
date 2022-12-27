@@ -14,8 +14,7 @@ const Timeline = () => {
  
   useEffect(() => {
    
-    // eslint-disable-next-line
-  }, [fetchPhotos , !fetchPhotos])
+    }, [fetchPhotos , !fetchPhotos])
   
 
   return (
